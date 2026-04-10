@@ -2,6 +2,17 @@
 
 Sistema interno em PHP para controle de cafe da equipe.
 
+## Visao geral
+
+O objetivo do projeto e centralizar, em uma interface simples:
+
+- quem trouxe cafe
+- consumo e estoque ao longo do mes
+- escala de preparo
+- ausencias temporarias
+- notificacoes para a equipe
+- trilha de auditoria das acoes administrativas
+
 ## Funcionalidades
 
 - autenticacao local com opcao de fallback LDAP
@@ -31,6 +42,14 @@ Sistema interno em PHP para controle de cafe da equipe.
 - `app/Views`: telas
 - `css/`: estilos
 - `imagens/`: assets
+
+## Stack
+
+- PHP
+- SQLite
+- Apache
+- HTML/CSS/JS
+- webhook HTTP para Microsoft Teams
 
 ## Banco de dados
 
@@ -92,6 +111,18 @@ Se nao quiser usar variavel de ambiente, tambem pode gravar o webhook em:
 ../cafe-storage/webhook_url.txt
 ```
 
+## LDAP
+
+Quando configurado, o sistema tenta autenticar primeiro com os dados locais e, se necessario, usa fallback LDAP.
+
+Campos relacionados:
+
+- `CAFE_LDAP_HOST`
+- `CAFE_LDAP_BASE_DN`
+- `CAFE_LDAP_UPN_SUFFIX`
+
+Se o ambiente nao tiver a extensao LDAP ativa, o sistema continua funcionando com autenticacao local.
+
 ## Escala automatica
 
 Na tela de configuracao, cada campo da escala aceita:
@@ -105,6 +136,19 @@ Com `AUTOMATICO`, o sistema:
 - evita repetir demais a mesma pessoa com base no historico recente
 - congela a resolucao por semana
 - substitui automaticamente pessoas ausentes
+
+## Dashboard
+
+O dashboard mostra:
+
+- consumo do mes
+- quantidade aberta
+- saldo em estoque
+- previsao mensal
+- tendencia de consumo
+- ranking de contribuicao
+- sugestao de proximo responsavel
+- pessoas com maior defasagem para trazer cafe
 
 ## Ferias e afastamentos
 
@@ -132,6 +176,13 @@ Sugestao de agendamento:
 
 - 07:00 para `manha`
 - 12:00 para `tarde`
+
+Exemplo de cron:
+
+```bash
+0 7 * * 1-5 php /var/www/html/cafe/cafe_notificar.php manha
+0 12 * * 1-5 php /var/www/html/cafe/cafe_notificar.php tarde
+```
 
 ## Permissoes de arquivos
 
@@ -171,6 +222,39 @@ php -S localhost:8080
 ```
 
 Se for usar Apache, aponte o DocumentRoot para a pasta `cafe`.
+
+## Deploy
+
+Checklist rapido de deploy:
+
+1. publicar a pasta `cafe` no DocumentRoot
+2. criar a pasta de storage fora do webroot
+3. dar permissao de escrita ao usuario do servidor web
+4. configurar variaveis de ambiente ou arquivo de webhook
+5. validar login, dashboard e notificacoes
+
+Exemplo de storage:
+
+```bash
+mkdir -p /var/www/cafe-storage
+chown -R www-data:www-data /var/www/cafe-storage
+chmod -R 775 /var/www/cafe-storage
+```
+
+## Roadmap
+
+Melhorias naturais para evolucao do projeto:
+
+- select de usuarios em todos os pontos de configuracao
+- perfis administrativos
+- exportacao CSV/Excel
+- tela de relatorios por periodo
+- confirmacao de preparo do cafe
+- testes automatizados
+
+## Licenca
+
+Este projeto pode ser distribuido sob licenca MIT, caso voce queira manter o repositorio aberto.
 
 ## Publicacao
 
