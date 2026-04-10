@@ -1,0 +1,16 @@
+/vendor/
+/node_modules/
+/php_errors.log
+/data/*.db
+/data/*.sqlite
+/data/*.sqlite3
+/data/*.log
+/.env
+/.env.*
+!/\.env.example
+/cafe-storage/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.tmp
