@@ -97,11 +97,11 @@ Se nao definir essas variaveis, o sistema usa placeholders de exemplo.
 
 O sistema envia notificacoes para o Teams usando webhook HTTP POST.
 
-Exemplo de payload enviado:
+Exemplo de payload enviado ao webhook do Teams:
 
 ```json
 {
-  "text": "Cafe - Claudionir, e sua vez de fazer o cafe da tarde (sexta-feira)."
+  "text": "Cafe - Nome da pessoa, e sua vez de fazer o cafe da tarde (sexta-feira)."
 }
 ```
 
