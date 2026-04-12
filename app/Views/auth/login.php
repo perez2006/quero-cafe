@@ -1,7 +1,7 @@
 <main class="login-shell">
     <section class="login-card">
         <div class="login-hero">
-            <img src="<?= e(asset_url('imagens/quero.png')) ?>" alt="Quero Cafe" class="login-logo">
+            <img src="<?= e(asset_url('imagens/login-cafe.gif')) ?>" alt="Quero Cafe" class="login-logo login-gif">
         </div>
 
         <?php if (!empty($errors)): ?>

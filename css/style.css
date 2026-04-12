@@ -130,8 +130,25 @@ tr:hover td { background: rgba(239, 228, 215, 0.32); }
 .space-top { margin-top: 24px; }
 .login-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
 .login-card { width: min(100%, 520px); padding: 32px; }
-.login-hero { display: flex; justify-content: center; align-items: center; margin-bottom: 28px; }
+.login-hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.login-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.64), rgba(255, 253, 249, 0.9)), url("../imagens/quero.png") center / contain no-repeat;
+  opacity: 0.78;
+}
 .login-logo { width: min(100%, 340px); height: auto; }
+.login-gif { position: relative; width: min(100%, 430px); border-radius: 8px; display: block; z-index: 1; }
 .login-banner { width: 100%; margin-top: 24px; border-radius: 14px; }
 .guest-page { display: block; }
 .cursor-coffee, .btn-primary, .feature-callout {
