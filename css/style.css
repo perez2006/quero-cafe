@@ -128,8 +128,28 @@ tr:hover td { background: rgba(239, 228, 215, 0.32); }
 .feature-callout strong { font-size:22px; }
 .feature-callout span { color:var(--text-muted); }
 .space-top { margin-top: 24px; }
-.login-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-.login-card { width: min(100%, 520px); padding: 32px; }
+.login-shell {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow: hidden;
+}
+.login-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../imagens/quero.png");
+  background-size: 160px auto;
+  background-position: 18px 14px;
+  background-repeat: repeat;
+  opacity: 0.11;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.login-card { position: relative; z-index: 1; width: min(100%, 520px); padding: 32px; }
 .login-hero {
   position: relative;
   display: flex;
@@ -140,15 +160,8 @@ tr:hover td { background: rgba(239, 228, 215, 0.32); }
   overflow: hidden;
   border-radius: 8px;
 }
-.login-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.64), rgba(255, 253, 249, 0.9)), url("../imagens/quero.png") center / contain no-repeat;
-  opacity: 0.78;
-}
 .login-logo { width: min(100%, 340px); height: auto; }
-.login-gif { position: relative; width: min(100%, 430px); border-radius: 8px; display: block; z-index: 1; }
+.login-gif { position: relative; width: min(100%, 430px); border-radius: 8px; display: block; z-index: 1; box-shadow: 0 18px 42px rgba(48, 28, 14, 0.18); }
 .login-banner { width: 100%; margin-top: 24px; border-radius: 14px; }
 .guest-page { display: block; }
 .cursor-coffee, .btn-primary, .feature-callout {
