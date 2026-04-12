@@ -50,6 +50,8 @@ final class DashboardController extends Controller
                     $payload
                 );
                 Session::flash('success', 'Registro salvo com sucesso.');
+                Session::flash('last_record_type', $payload['tipo']);
+                Session::flash('last_record_person', $payload['nome']);
                 $this->redirect('?mes=' . rawurlencode(substr($payload['data'], 0, 7)));
             }
         }
@@ -61,6 +63,8 @@ final class DashboardController extends Controller
             'selectedMonth' => $selectedMonth,
             'selectedMonthLabel' => month_label($selectedMonth),
             'success' => Session::pullFlash('success'),
+            'lastRecordType' => Session::pullFlash('last_record_type', ''),
+            'lastRecordPerson' => Session::pullFlash('last_record_person', ''),
             'errors' => $errors,
             'currentSuggestion' => $this->scheduleSuggestions->buildCurrentSuggestionCard(),
         ] + $dashboard);

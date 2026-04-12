@@ -3,10 +3,8 @@ FROM php:8.3-apache
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libldap2-dev \
-        libonig-dev \
-        libsqlite3-dev \
     && docker-php-ext-configure ldap \
-    && docker-php-ext-install ldap mbstring pdo_sqlite sqlite3 \
+    && docker-php-ext-install ldap \
     && a2enmod rewrite headers \
     && { \
         echo '<Directory /var/www/html>'; \

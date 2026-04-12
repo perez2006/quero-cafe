@@ -1,6 +1,39 @@
-<div class="container">
+<?php
+$stockBalance = (int) $summary['saldoAcumulado'];
+$stockCapacity = 2000;
+$stockPercent = max(0, min(100, (int) round(($stockBalance / $stockCapacity) * 100)));
+$stockCriticalLimit = 500;
+$isStockCritical = $stockBalance <= $stockCriticalLimit;
+$toastMessage = (string) ($success ?? '');
+$lastRecordType = (string) ($lastRecordType ?? '');
+$lastRecordPerson = (string) ($lastRecordPerson ?? '');
+if ($toastMessage !== '') {
+    if ($lastRecordType === 'trouxe') {
+        $toastMessage = $lastRecordPerson !== ''
+            ? sprintf('%s trouxe cafe. Ainda ha esperanca.', $lastRecordPerson)
+            : 'Cafe registrado. A firma continua de pe.';
+    } elseif ($lastRecordType === 'abriu') {
+        $toastMessage = 'Cafe aberto. Agora vai.';
+    } elseif ($lastRecordType === 'acabou') {
+        $toastMessage = 'Estoque atualizado. O caos foi adiado.';
+    }
+}
+?>
+<div class="container dashboard-shell<?= $isStockCritical ? ' stock-is-critical' : '' ?>"
+     data-toast-message="<?= e($toastMessage) ?>"
+     data-record-type="<?= e($lastRecordType) ?>"
+     data-record-person="<?= e($lastRecordPerson) ?>">
     <header class="page-header">
         <div class="brand">
+            <div class="brand-kicker">
+                <div class="dashboard-cup" aria-hidden="true">
+                    <span class="cup-steam steam-one"></span>
+                    <span class="cup-steam steam-two"></span>
+                    <span class="cup-steam steam-three"></span>
+                    <span class="cup-bowl"></span>
+                </div>
+                <span>plantao cafeinado</span>
+            </div>
             <h1>Quero Cafe</h1>
             <p>Acompanhamento de consumo • <strong><?= e($selectedMonthLabel) ?></strong></p>
         </div>
@@ -19,7 +52,18 @@
     <section class="stats-grid stats-grid-5">
         <div class="stat-card"><span class="stat-label">Consumido</span><span class="stat-value"><?= e(format_weight((int) $summary['consumidoMes'])) ?></span></div>
         <div class="stat-card"><span class="stat-label">Aberto</span><span class="stat-value"><?= e(format_weight((int) $summary['abertoMes'])) ?></span></div>
-        <div class="stat-card"><span class="stat-label">Saldo em estoque</span><span class="stat-value accent"><?= e(format_weight((int) $summary['saldoAcumulado'])) ?></span></div>
+        <div class="stat-card stock-card<?= $isStockCritical ? ' stock-critical' : '' ?>" style="--stock-level: <?= $stockPercent ?>%;">
+            <div class="stock-card-head">
+                <span class="stat-label">Saldo em estoque</span>
+                <span class="stock-pill"><?= $stockPercent ?>%</span>
+            </div>
+            <span class="stat-value accent"><?= e(format_weight($stockBalance)) ?></span>
+            <div class="coffee-gauge" aria-hidden="true">
+                <div class="coffee-gauge-fill"></div>
+                <div class="coffee-gauge-shine"></div>
+            </div>
+            <span class="stat-note"><?= $isStockCritical ? 'Estoque baixo. O setor entra em colapso em breve.' : 'Garrafa sob controle. O caos foi adiado.' ?></span>
+        </div>
         <div class="stat-card">
             <span class="stat-label">Previsao mensal</span>
             <span class="stat-value"><?= e(format_weight((int) $forecast['projected_grams'])) ?></span>
@@ -65,7 +109,7 @@
                     </div>
 
                     <div class="form-group"><label for="observacao">Observacoes</label><textarea id="observacao" name="observacao" maxlength="140" rows="3"></textarea></div>
-                    <button class="btn-primary" type="submit">Salvar registro</button>
+                    <button class="btn-primary cursor-coffee" type="submit">Salvar registro</button>
                 </form>
             </section>
 
