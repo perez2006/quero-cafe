@@ -1,0 +1,19 @@
+services:
+  quero-cafe:
+    build: .
+    container_name: quero-cafe
+    restart: unless-stopped
+    ports:
+      - "${CAFE_HTTP_PORT:-8080}:80"
+    environment:
+      CAFE_APP_ENV: "${CAFE_APP_ENV:-production}"
+      CAFE_DB_PATH: "/var/www/cafe-storage/cafe.db"
+      CAFE_LDAP_HOST: "${CAFE_LDAP_HOST:-ldap.example.local}"
+      CAFE_LDAP_BASE_DN: "${CAFE_LDAP_BASE_DN:-DC=example,DC=local}"
+      CAFE_LDAP_UPN_SUFFIX: "${CAFE_LDAP_UPN_SUFFIX:-example.local}"
+      CAFE_WEBHOOK_URL: "${CAFE_WEBHOOK_URL:-}"
+    volumes:
+      - cafe-storage:/var/www/cafe-storage
+
+volumes:
+  cafe-storage:

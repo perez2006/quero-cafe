@@ -1,8 +1,6 @@
 DirectoryIndex index.php index.html
 
 RewriteEngine On
-RewriteBase /cafe/
-
 RewriteRule ^(app|data)(/|$) - [F,L,NC]
 RewriteRule \.(db|sqlite|sqlite3|env|log)$ - [F,L,NC]
 RewriteRule ^(bootstrap|auth|app_utils|ldap_auth)\.php$ - [F,L,NC]

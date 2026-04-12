@@ -223,6 +223,49 @@ php -S localhost:8080
 
 Se for usar Apache, aponte o DocumentRoot para a pasta `cafe`.
 
+## Execucao com Docker
+
+O projeto inclui `Dockerfile` e `docker-compose.yml` para rodar com Apache, PHP 8.3 e SQLite.
+
+Subir a aplicacao:
+
+```bash
+docker compose up -d --build
+```
+
+Acessar:
+
+```text
+http://localhost:8080
+```
+
+Parar:
+
+```bash
+docker compose down
+```
+
+O banco SQLite fica em um volume persistente do Docker montado em:
+
+```text
+/var/www/cafe-storage/cafe.db
+```
+
+Para trocar a porta local:
+
+```bash
+CAFE_HTTP_PORT=8081 docker compose up -d --build
+```
+
+Variaveis aceitas pelo `docker-compose.yml`:
+
+- `CAFE_HTTP_PORT`
+- `CAFE_APP_ENV`
+- `CAFE_LDAP_HOST`
+- `CAFE_LDAP_BASE_DN`
+- `CAFE_LDAP_UPN_SUFFIX`
+- `CAFE_WEBHOOK_URL`
+
 ## Deploy
 
 Checklist rapido de deploy:
