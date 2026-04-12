@@ -7,6 +7,7 @@ RUN apt-get update \
     && docker-php-ext-install ldap \
     && a2enmod rewrite headers \
     && { \
+        echo 'ServerName localhost'; \
         echo '<Directory /var/www/html>'; \
         echo '    AllowOverride All'; \
         echo '    Require all granted'; \
