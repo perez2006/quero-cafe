@@ -130,8 +130,8 @@ tr:hover td { background: rgba(239, 228, 215, 0.32); }
 .space-top { margin-top: 24px; }
 .login-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
 .login-card { width: min(100%, 520px); padding: 32px; }
-.login-hero { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; margin-bottom: 24px; }
-.login-logo { width: 96px; height: auto; }
+.login-hero { display: flex; justify-content: center; align-items: center; margin-bottom: 28px; }
+.login-logo { width: min(100%, 340px); height: auto; }
 .login-banner { width: 100%; margin-top: 24px; border-radius: 14px; }
 .guest-page { display: block; }
 .cursor-coffee, .btn-primary, .feature-callout {

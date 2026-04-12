@@ -2,10 +2,6 @@
     <section class="login-card">
         <div class="login-hero">
             <img src="<?= e(asset_url('imagens/quero.png')) ?>" alt="Quero Cafe" class="login-logo">
-            <div>
-                <h1>Quero Cafe</h1>
-                <p>Painel interno para registros, escala e acompanhamento do consumo.</p>
-            </div>
         </div>
 
         <?php if (!empty($errors)): ?>
@@ -29,7 +25,5 @@
 
             <button type="submit" class="btn-primary">Entrar</button>
         </form>
-
-        <img src="<?= e(asset_url('imagens/quero1.png')) ?>" alt="Cafe" class="login-banner">
     </section>
 </main>
