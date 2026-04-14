@@ -3,7 +3,6 @@
     <header class="page-header">
         <div class="brand">
             <h1>Gerenciar usuarios</h1>
-            <p>Cadastro centralizado com senha segura e edicao sem expor credenciais.</p>
         </div>
     </header>
 
